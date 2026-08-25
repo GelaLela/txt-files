@@ -1,0 +1,29 @@
+Create a PostgreSQL schema with exactly 13 tables. Preserve my original fields exactly; only add fields needed to reach 8 columns per table.
+
+users: user_ID PK, Email, password, role, created_at + account_status, email_verified, updated_at
+
+profile: profile_ID PK, user_ID FK, Lastname, Firstname, Middlename, Bio, Avatar_url + location
+
+Projects: project_ID PK, profile_ID FK, project_title, description, featured_img, is_featured BOOLEAN, url_link, created_at
+
+project_media: project_media_ID PK, project_ID FK, media_type, media_url, display_order + media_title, media_description, created_at
+
+skills: skills_ID PK, profile_ID FK, category + skill_name, skill_description, proficiency_level, years_experience, created_at
+
+skill_profile: skill_profile_ID PK, profile_ID FK, skills_ID FK, proficiency_level, years_experience, is_primary, created_at, updated_at
+
+education: education_ID PK, profile_ID FK, school_name, degree, field_of_study, start_date, end_date, description
+
+work_experience: experience_ID PK, profile_ID FK, company_name, job_title, employment_type, start_date, end_date, description
+
+certifications: certification_ID PK, profile_ID FK, certification_name, issuing_organization, issue_date, expiration_date, credential_ID, credential_url
+
+project_skills: project_skill_ID PK, project_ID FK, skills_ID FK, usage_description, proficiency_level, is_primary, created_at, updated_at
+
+social_links: social_link_ID PK, profile_ID FK, platform, username, url, display_order, is_visible, created_at
+
+messages: message_ID PK, profile_ID FK, sender_name, sender_email, subject, message, is_read, created_at
+
+analytics: analytics_ID PK, profile_ID FK, project_ID FK, view_count, visited_at + event_type, analytics_source, visitor_ip
+
+Use valid Aiven PostgreSQL SQL, appropriate data types, PKs, FKs, NOT NULL, UNIQUE Email, CHECK view_count >= 0, indexes on FKs and analytics dates/IDs. Allow analytics.project_ID NULL. Output CREATE TABLE statements only.
